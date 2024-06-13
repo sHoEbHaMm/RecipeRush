@@ -6,6 +6,6 @@ public class KitchenCounter : MonoBehaviour
 {
     public void Interact()
     {
-        Debug.Log("Interacting");
+        Debug.LogWarning("Interacting");
     }
 }

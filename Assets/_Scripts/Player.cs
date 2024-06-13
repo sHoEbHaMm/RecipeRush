@@ -62,10 +62,6 @@ public class Player : MonoBehaviour
                 {
                     SetSelectedCounter(kitchenCounter);
                 }
-                else
-                {
-                    SetSelectedCounter(null);
-                }
             }
         }
         else
@@ -73,7 +69,7 @@ public class Player : MonoBehaviour
             SetSelectedCounter(null);
         }
 
-        Debug.Log(selectedCounter);
+        //Debug.Log(selectedCounter);
     }
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
@@ -84,7 +80,6 @@ public class Player : MonoBehaviour
     {
         Vector2 inputVector = gameInput.GetInputVectorNormalized();
         Vector3 movementDirection = new Vector3(inputVector.x, 0f, inputVector.y);
-        transform.forward = Vector3.Slerp(transform.forward, movementDirection, rotationSpeed * Time.deltaTime);
         
         // IF THE PLAYER CANNOT MOVE IN CURRENT DIRECTION
         if(!canMoveInThisDirection(movementDirection))
@@ -109,6 +104,8 @@ public class Player : MonoBehaviour
         {
             transform.position += movementDirection * movementSpeed * Time.deltaTime;
         }
+
+        transform.forward = Vector3.Slerp(transform.forward, movementDirection, rotationSpeed * Time.deltaTime);
     }
     bool canMoveInThisDirection(Vector3 directionToMoveIn)
     {
