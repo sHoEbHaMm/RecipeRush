@@ -6,11 +6,60 @@ public class KitchenCounter : MonoBehaviour
 {
     [SerializeField] private SO_KitchenObject kitchenObject;
     [SerializeField] private Transform spawnPoint;
+
+    private KitchenObject objectOnTop;
+
+    //Testing
+    [SerializeField] private KitchenCounter otherCounter;
+
+    private void Start()
+    {
+        Debug.Log(objectOnTop);
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T) && objectOnTop != null)
+        {
+            objectOnTop.SetCounter(otherCounter);
+        }
+    }
     public void Interact()
     {
-        Transform objectTransform = Instantiate(kitchenObject.GetPrefab(), spawnPoint);
-        objectTransform.localPosition = Vector3.zero;
-        Debug.Log(objectTransform.GetComponent<KitchenObject>().GetObjectType().GetObjectName());
-        //Debug.LogWarning("Interacting");
+        if(objectOnTop == null)
+        {
+            Transform objectTransform = Instantiate(kitchenObject.GetPrefab(), spawnPoint); 
+            objectTransform.GetComponent<KitchenObject>().SetCounter(this);
+        }
+        else
+
+        {
+            Debug.Log(objectOnTop.GetCounter());
+        }
+    }
+
+    public Transform GetObjectSpawnPoint()
+    {
+        return this.spawnPoint;
+    }
+
+    public void SetObjectOnTop(KitchenObject newObjectOnTop)
+    {
+        objectOnTop = newObjectOnTop;
+    }
+
+    public KitchenObject GetObjectOnTop()
+    {
+        return objectOnTop;
+    }
+
+    public void ClearKitchenObject()
+    { 
+        objectOnTop = null; 
+    }
+
+    public bool HasObjectOnTop()
+    {
+        return objectOnTop != null;
+
     }
 }
