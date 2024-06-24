@@ -5,31 +5,32 @@ using UnityEngine;
 public class KitchenObject : MonoBehaviour
 {
     [SerializeField] private SO_KitchenObject objectType;
-    private KitchenCounter parentCounter;
+    private IKitchenObjectParent kitchenObjectParent;
 
     public SO_KitchenObject GetObjectType() { return objectType; }
 
-    public KitchenCounter GetCounter() { return this.parentCounter; }
+    public IKitchenObjectParent GetKitchenObjectParent() { return this.kitchenObjectParent; }
 
-    public void SetCounter(KitchenCounter newCounter) 
+    public void SetKitchenObjectParent(IKitchenObjectParent newParent) 
     {
-        if(newCounter)
+        if(newParent != null)
         {
-            if(newCounter.HasObjectOnTop())
+            if(newParent.HasObjectOnTop())
             {
                 Debug.LogError("The other counter is already occupied");
             }
             else
             {
-                if(parentCounter)
+
+                if(kitchenObjectParent != null)
                 {
-                    this.parentCounter.ClearKitchenObject();
+                    this.kitchenObjectParent.ClearKitchenObject();
                 }
 
-                this.parentCounter = newCounter;
-                transform.parent = newCounter.GetObjectSpawnPoint();
+                this.kitchenObjectParent = newParent;
+                transform.parent = newParent.GetObjectSpawnPoint();
                 transform.localPosition = Vector3.zero;
-                newCounter.SetObjectOnTop(this);
+                newParent.SetObjectOnTop(this);
             }
         }
     
