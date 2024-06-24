@@ -49,12 +49,15 @@ public class KitchenCounter : MonoBehaviour
 
     public KitchenObject GetObjectOnTop()
     {
-        return objectOnTop;
+        if(objectOnTop)
+            return objectOnTop;
+        return null;
     }
 
     public void ClearKitchenObject()
-    { 
-        objectOnTop = null; 
+    {
+        if(objectOnTop)
+            objectOnTop = null; 
     }
 
     public bool HasObjectOnTop()

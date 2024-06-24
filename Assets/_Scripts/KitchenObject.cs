@@ -11,24 +11,28 @@ public class KitchenObject : MonoBehaviour
 
     public KitchenCounter GetCounter() { return this.parentCounter; }
 
-    public void SetCounter(KitchenCounter newCounter) {
-
-        if (newCounter.HasObjectOnTop())
+    public void SetCounter(KitchenCounter newCounter) 
+    {
+        if(newCounter)
         {
-            Debug.LogError("Counter already has an object on top of it!");
-            return;
+            if(newCounter.HasObjectOnTop())
+            {
+                Debug.LogError("The other counter is already occupied");
+            }
+            else
+            {
+                if(parentCounter)
+                {
+                    this.parentCounter.ClearKitchenObject();
+                }
+
+                this.parentCounter = newCounter;
+                transform.parent = newCounter.GetObjectSpawnPoint();
+                transform.localPosition = Vector3.zero;
+                newCounter.SetObjectOnTop(this);
+            }
         }
-
-        if (this.parentCounter != null)
-        {
-            this.parentCounter.ClearKitchenObject();
-        }
-
-        this.parentCounter = newCounter;
-
-        newCounter.SetObjectOnTop(this);
-        transform.parent = this.parentCounter.GetObjectSpawnPoint();
-        transform.localPosition = Vector3.zero;
+    
 
     }
 }
