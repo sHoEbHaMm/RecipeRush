@@ -10,13 +10,17 @@ public class ContainerCounter : BaseCounter
 
     public override void Interact(Player player)
     {
-
-        if (!HasObjectOnTop())
+        if(!player.HasObjectOnTop())
         {
             Transform objectTransform = Instantiate(kitchenObject.GetPrefab());
             objectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
+        else
+        {
+            Debug.Log("Player already holding something");
+        }
+
     }
 
 }

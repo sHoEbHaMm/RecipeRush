@@ -8,7 +8,25 @@ public class KitchenCounter : BaseCounter
 
     public override void Interact(Player player)
     {
+        if(!HasObjectOnTop())
+        {
+            if(player.HasObjectOnTop())
+            {
+                player.GetObjectOnTop().SetKitchenObjectParent(this);
+            }
 
+        }
+        else
+        {
+            if(player.HasObjectOnTop())
+            {
+
+            }
+            else
+            {
+                GetObjectOnTop().SetKitchenObjectParent(player);
+            }
+        }
     }
 
 }
