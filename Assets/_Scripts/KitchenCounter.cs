@@ -24,7 +24,7 @@ public class KitchenCounter : MonoBehaviour, IKitchenObjectParent
         }
     }
 
-    public Transform GetObjectSpawnPoint()
+    public Transform GetObjectSpawnPoint() 
     {
         return this.spawnPoint;
     }
