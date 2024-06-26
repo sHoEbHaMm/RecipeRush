@@ -12,4 +12,5 @@ public class SO_KitchenObject : ScriptableObject
     public Transform GetPrefab () {  return this.ObjectPrefab; }
     public Sprite GetIcon () { return this.Icon; }
     public string GetObjectName () { return this.ObjectName;}
+
 }

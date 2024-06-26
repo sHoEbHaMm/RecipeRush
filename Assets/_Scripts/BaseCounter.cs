@@ -12,6 +12,11 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
 
     }
 
+    public virtual void AltInteract(Player player)
+    {
+
+    }
+
     public Transform GetObjectSpawnPoint()
     {
         return this.spawnPoint;
